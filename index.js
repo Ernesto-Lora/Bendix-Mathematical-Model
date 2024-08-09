@@ -2,6 +2,7 @@ const massesDefault = [0.124, 0.059 + 0.011, 0.130 + 0.059, 0.500];
 const innerRadiusDefault = [0.012, 0.012, 0.16, 0.012];
 const outterRadiusDefault = [0.054, 0.054, 0.16, 0.160];
 
+var p = 0.012;
 // 
 function finalFrecFun (I, If, frecIni){
     I = parseFloat(I);
@@ -30,6 +31,20 @@ function frecuency(vel, step){
 function collisionLinearVelocity(initialVel, k, distance, mass){
     return Math.sqrt(initialVel**2 - (k*distance**2)/(mass));
 }
+
+function springRateCritc (initialVel, finalVel, distance, mass){
+    return mass*((initialVel**2-finalVel**2)/distance**2);
+}
+
+
+function momentOfInertiaRatio (Itotal, IFlywheel){
+    return ((Itotal)/(Itotal + IFlywheel));
+}
+
+function springRateCritcAfterCollision (inertiaRatio, initialVel,distance1, distance2, mass){
+   return (mass*inertiaRatio**2*initialVel**2)/((inertiaRatio**2-1)*distance1**2+distance2**2);
+}
+
 
 
 var masses = document.querySelectorAll(".masses input");
@@ -111,6 +126,11 @@ momentsOfInertia.slice(0, -1).forEach(element => {
     totalMomentInertia += parseFloat(element);
 });
 
+var totalMass =  0;
+massesArray.slice(0, -1).forEach(element => {
+    totalMass += parseFloat(element.value);
+});
+
 
 initialPinionCritic = frecAtCollitionFun (totalMomentInertia,
     momentsOfInertia.slice(-1), 300);
@@ -120,11 +140,8 @@ const initialFrecArray = math.range(400, initialPinionCritic, 0.1, true).toArray
 const finalFrecArray = initialFrecArray.map(frec => finalFrecFun(totalMomentInertia,
      momentsOfInertia.slice(-1), frec));
 
-// Create a list of colors based on the threshold
-const colors2 = finalFrecArray.map(value => value > 300 ? 'red' : 'blue');
-
  // Define the plot data
- var trace1 = 
+ var trace1InitialVsFinialFrec = 
     {
         x: initialFrecArray ,
         y: finalFrecArray ,
@@ -138,7 +155,7 @@ const initialFrecArray2 = math.range(initialPinionCritic, 800, 0.1, true).toArra
 const finalFrecArray2 = initialFrecArray2.map(frec => finalFrecFun(totalMomentInertia,
      momentsOfInertia.slice(-1), frec));
 
-var trace2 = 
+var trace2InitialVsFinialFrec = 
     {
         x: initialFrecArray2 ,
         y: finalFrecArray2 ,
@@ -149,49 +166,71 @@ var trace2 =
 ;
 
 // Define the plot layout
-    var layout = {
-        title: '',
-        xaxis: {
-            title: 'Pinion Frecuency at collision [RPM]',
-        },
-        yaxis: {
-            title: 'Final Flywheel Frequency [RPM]',
-        }
-    };
+var layoutInitialVsFinialFrec = {
+    title: '',
+    xaxis: {
+        title: 'Pinion Frecuency at collision [RPM]',
+    },
+    yaxis: {
+        title: 'Final Flywheel Frequency [RPM]',
+    }
+};
 
-    const data = [trace1, trace2];
+const dataInitialVsFinialFrec = [trace1InitialVsFinialFrec, trace2InitialVsFinialFrec];
 
-    // Plot the sine function
-    Plotly.newPlot('final-frecuency-plot', data, layout);
+Plotly.newPlot('final-frecuency-plot', dataInitialVsFinialFrec, layoutInitialVsFinialFrec);
+//// si el ploty no me deja puedes hacer una función
+
+var springRateArray = math.range(10, 200, 0.1, true).toArray();
+var frecuencyAtCollision = springRateArray.map(k => frecuency(collisionLinearVelocity(linearVelocity(5000*0.02, p),
+ k, 0.05, totalMass)/0.02, p)  );
+
+var traceSpringRateVsFrec =  {
+    x: springRateArray ,
+    y: frecuencyAtCollision ,
+    type: 'scatter',
+    mode: 'lines',
+    line: { color: 'blue' }
+};
+
+var layoutSpringRateVsFrec = {
+    title: '',
+    xaxis: {
+        title: 'Spring Rate [N/m]',
+    },
+    yaxis: {
+        title: 'Pinion Frecuency at collision [RPM]',
+    }
+};
+
+Plotly.newPlot('pinion-frecuency-spring-plot', [traceSpringRateVsFrec], layoutSpringRateVsFrec);
+
+var inertiaRatio = momentOfInertiaRatio (totalMomentInertia, momentsOfInertia.slice(-1)[0] );
+
+var velocityKcritic1 =  linearVelocity(5000*0.02, p) ;
+
+var kcritic1= springRateCritcAfterCollision (inertiaRatio,
+     initialVel = velocityKcritic1,
+     distance1=0.05, distance2=0.05+0.004, mass=totalMass);
+
+criticInitialVelocity = linearVelocity( frecAtCollitionFun(totalMomentInertia,
+     momentsOfInertia.slice(-1)[0], 300*0.02), p);
+
+var kcritic2 = springRateCritc(linearVelocity(5000*0.02, p), criticInitialVelocity,
+ 0.05, totalMass);
+
+ var kcritic3 = springRateCritc(linearVelocity(5000*0.02, p), 0,
+ 0.05, totalMass);
 
 
-////////////////////////////////////////
-    const x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const y = [1, 3, 2, 5, 4, 7, 6, 8, 10, 9];
-    const threshold = 5;
+function plotTraces(limits = [], function0){
+    funArray = [];
+    for (let index = 0; index < limits.length; index++) {
+        funArray[index] = function0(limits[index]);
+    }
+    return funArray;
+}
 
-    // Create a list of colors based on the threshold
-    const colors = y.map(value => value > threshold ? 'red' : 'blue');
-
-    // Create the trace for the scatter plot
-    const trace = {
-        x: x,
-        y: y,
-        mode: 'markers',
-        marker: {
-            color: colors,
-            size: 10
-        },
-        type: 'scatter'
-    };
-
-    // Define the layout
-    const layout2 = {
-        title: 'Scatter plot with conditional coloring',
-        xaxis: { title: 'X Axis' },
-        yaxis: { title: 'Y Axis' }
-    };
-
-    // Plot the graph
-    Plotly.newPlot('myPlot', [trace], layout2);
-
+function sqr(x){
+    return x**2;
+}

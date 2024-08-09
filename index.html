@@ -14,20 +14,20 @@
 <div class="bendix-features">
     <h2> Bendix Features </h2>
     <div class="masses">
-        <h2> Masses </h2>
+        <h2> Masses[kg] </h2>
         <input type="number">
         <input type="number">
         <input type="number">
-    </div>
+    </div> 
 
     <div class="inner-radius">
-        <h2> Inner radious </h2>
+        <h2> Inner radious[m] </h2>
         <input type="number">
         <input type="number">
         <input type="number">
     </div>
     <div class="outter-radius">
-        <h2> Outter radious </h2>
+        <h2> Outter radious[m] </h2>
         <input type="number">
         <input type="number">
         <input type="number">
@@ -37,28 +37,30 @@
 <div class="flywheel-features">
     <h2> Flywheel Features </h2>
     <div class="masses">
-        <h2> Masses </h2>
+        <h2> Masses[kg] </h2>
         <input type="number">
     </div>
     <div class="inner-radius">
-        <h2> Inner radious </h2>
+        <h2> Inner radious[m] </h2>
         <input type="number">
     </div>
     <div class="outter-radius">
-        <h2> Outter radious </h2>
+        <h2> Outter radious[m] </h2>
         <input type="number">
     </div>
 </div>
 
 <div>
-    <label for="initial-frec">Initial Frecuency:</label>
+    <label for="initial-frec">Initial Frecuency [RPM]:</label>
     <input id="pinion-initial-frec" type="number" name="initial-frec">
+
+    <label for="final-frec">Final Frecuency[RPM]:</label>
     <output id ="flywheel-frec" name="final-frec"> </output>
 </div>
 
-<div id="final-frecuency-plot"></div>
+<div id="final-frecuency-plot" class="plot"></div>
 
-<div id="pinion-frecuency-spring-plot"></div>
+<div id="pinion-frecuency-spring-plot" class="plot"></div>
 
 <div id="myPlot"></div>
 
