@@ -131,9 +131,10 @@ massesArray.slice(0, -1).forEach(element => {
     totalMass += parseFloat(element.value);
 });
 
-
 initialPinionCritic = frecAtCollitionFun (totalMomentInertia,
     momentsOfInertia.slice(-1), 300);
+
+
 
 
 const initialFrecArray = math.range(400, initialPinionCritic, 0.1, true).toArray();
@@ -203,7 +204,7 @@ var layoutSpringRateVsFrec = {
     }
 };
 
-Plotly.newPlot('pinion-frecuency-spring-plot', [traceSpringRateVsFrec], layoutSpringRateVsFrec);
+// Plotly.newPlot('pinion-frecuency-spring-plot', [traceSpringRateVsFrec], layoutSpringRateVsFrec);
 
 var inertiaRatio = momentOfInertiaRatio (totalMomentInertia, momentsOfInertia.slice(-1)[0] );
 
@@ -222,15 +223,38 @@ var kcritic2 = springRateCritc(linearVelocity(5000*0.02, p), criticInitialVeloci
  var kcritic3 = springRateCritc(linearVelocity(5000*0.02, p), 0,
  0.05, totalMass);
 
-
-function plotTraces(limits = [], function0){
-    funArray = [];
-    for (let index = 0; index < limits.length; index++) {
-        funArray[index] = function0(limits[index]);
+function getTraces(limits = [], color = [], function0){
+    var x = [];
+    var y = [];
+    for (let index = 0; index < limits.length-1; index++) {
+       x[index] = math.range(limits[index], limits[index+1], 0.1, true).toArray();
+       y[index] = x[index].map(x => function0(x));
     }
-    return funArray;
+
+    var traces = [];
+
+    for (let index = 0; index < x.length; index++) {
+        traces[index] = {
+            x: x[index] ,
+            y: y[index],
+            type: 'scatter',
+            mode: 'lines',
+            line: { color: color[index] }
+        };
+    }
+
+    return traces;
 }
 
-function sqr(x){
-    return x**2;
+function frecuencyAtCollisionK(k){
+    return frecuency(collisionLinearVelocity(linearVelocity(5000*0.02, p),
+    k, 0.05, totalMass), p) /0.02
 }
+
+limitsK = [10, kcritic1, kcritic2, kcritic3]
+colorsK = ["red", "blue", "red"]
+
+var tracesK = getTraces(limitsK, colorsK, frecuencyAtCollisionK);
+
+Plotly.newPlot('pinion-frecuency-spring-plot', tracesK, layoutSpringRateVsFrec);
+
