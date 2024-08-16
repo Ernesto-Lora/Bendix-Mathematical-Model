@@ -127,3 +127,23 @@ plotFinalFrecuency(getMomentsOfInertia(),  getTotalMomentInertia(),
  plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
  getTotalMass(), p)
 
+
+
+ var slider = document.getElementById("myRange");
+ var demo = document.getElementById("demo");
+
+ slider.min = 2;
+ slider.max = 1000;
+ demo.innerHTML = slider.value; // Display the default slider value
+ 
+ // Update the current slider value (each time you drag the slider handle)
+ slider.oninput = function() {
+   demo.innerHTML = this.value;
+ }
+
+import {plotPosition} from "./components/plots/plotPosition.js";
+
+plotPosition(0.05, linearVelocity(5000*0.02, p),
+ finalFrecFun(getTotalMomentInertia(), getMomentsOfInertia().slice(-1)[0],
+ linearVelocity(5000*0.02, p) ) 
+ , 5, getTotalMass());

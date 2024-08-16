@@ -1,10 +1,11 @@
-export function getTraces(limits = [], color = [], function0){
+export function getTraces(limits = [], color = [],step, function0){
     var x = [];
     var y = [];
     for (let index = 0; index < limits.length-1; index++) {
-       x[index] = math.range(limits[index], limits[index+1], 0.1, true).toArray();
-       y[index] = x[index].map(x => function0(x));
-    }
+        x[index] = math.range(limits[index], limits[index+1], step, true).toArray();
+        y[index] = x[index].map(x => function0(x));
+        }
+    
 
     var traces = [];
 

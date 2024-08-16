@@ -14,7 +14,7 @@ export function plotFinalFrecuency(momentsOfInertia, totalMomentInertia,
 
     var colors = ["red", "blue"];
 
-    var traces = getTraces(limits, colors, finalFrecFunFrec);
+    var traces = getTraces(limits, colors, 0.1, finalFrecFunFrec);
 
     var layout = {
         title: '',
