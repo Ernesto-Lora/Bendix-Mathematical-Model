@@ -122,28 +122,45 @@ import {plotFinalFrecuency} from "./components/plots/plotFinalFrecuency.js"
 plotFinalFrecuency(getMomentsOfInertia(),  getTotalMomentInertia(),
  frecAtCollitionFun, finalFrecFun);
 
- import {plotPinionFrecuencySpring} from "./components/plots/plotPinionFrecuencySpring.js";
-
- plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
- getTotalMass(), p)
+ import {plotPinionFrecuencySpring,
+     springCritics} from "./components/plots/plotPinionFrecuencySpring.js";
 
 
-
- var slider = document.getElementById("myRange");
- var demo = document.getElementById("demo");
-
- slider.min = 2;
- slider.max = 1000;
- demo.innerHTML = slider.value; // Display the default slider value
- 
- // Update the current slider value (each time you drag the slider handle)
- slider.oninput = function() {
-   demo.innerHTML = this.value;
- }
+ var critics = springCritics(getTotalMomentInertia(), getMomentsOfInertia(),
+ getTotalMass(), p);
 
 import {plotPosition} from "./components/plots/plotPosition.js";
+
+
+
+
+var slider = document.getElementById("myRange");
+var demo = document.getElementById("demo");
+
+slider.min = 2;
+slider.max = critics[2];
+demo.innerHTML = slider.value; // Display the default slider value
+
+plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
+getTotalMass(), p, slider.value);
+
 
 plotPosition(0.05, linearVelocity(5000*0.02, p),
  finalFrecFun(getTotalMomentInertia(), getMomentsOfInertia().slice(-1)[0],
  linearVelocity(5000*0.02, p) ) 
- , 5, getTotalMass());
+ , slider.value, getTotalMass())
+
+// Update the current slider value (each time you drag the slider handle)
+var k;
+slider.oninput = function() {
+  demo.innerHTML = this.value;
+  k = this.value;
+  plotPosition(0.05, linearVelocity(5000*0.02, p),
+        finalFrecFun(getTotalMomentInertia(), getMomentsOfInertia().slice(-1)[0],
+        linearVelocity(5000*0.02, p) ), 
+        k, getTotalMass());
+
+ plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
+    getTotalMass(), p, slider.value);
+}
+

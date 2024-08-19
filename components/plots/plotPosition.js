@@ -29,7 +29,7 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
 
     
     var lim2 = [impactTime, 
-        returnTime(impactPosition, impactVelocity, springFrequency)];
+        returnTime(impactPosition, impactVelocity, springFrequency)+impactTime];
     function positionT2(t){
         return position(impactPosition, impactVelocity, springFrequency, t-impactTime);
     };
@@ -39,14 +39,30 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
     var layout = {
         title: '',
         xaxis: {
-            title: 'Pinion Frecuency at collision [RPM]',
+            title: 'Time [s]',
         },
         yaxis: {
-            title: 'Final Flywheel Frequency [RPM]',
+            title: 'Pinion position [m]',
         }
     };
+    var line1 = {
+        x : [0, returnTime(impactPosition, impactVelocity, springFrequency)+impactTime],
+        y : [impactPosition, impactPosition],
+        type: "line",
+        line: {color: "black",
+            dash: "dash"
+        }
+    }
 
-    var data = [traces1[0], traces2[0]];
+    var line2 = {
+        x : [0, returnTime(impactPosition, impactVelocity, springFrequency)+impactTime],
+        y : [impactPosition+0.004, impactPosition+0.004],
+        type: "line",
+        line: {color: "red",
+            dash: "dash"
+        }
+    }
+    var data = [traces1[0], traces2[0], line1, line2];
 
     Plotly.newPlot('position-plot',
          data, layout);
