@@ -11,63 +11,68 @@
 <body>
     <h1>Bendix Mathematical Model</h1>
 
-<div class="bendix-features">
-    <h2> Bendix Features </h2>
-    <div class="masses">
-        <h3> Masses[kg] </h2>
-        <input type="number">
-        <input type="number">
-        <input type="number">
-    </div> 
+<div id="features">
 
-    <div class="inner-radius">
-        <h3> Inner radious[m] </h2>
-        <input type="number">
-        <input type="number">
-        <input type="number">
-    </div>
-    <div class="outter-radius">
-        <h3> Outter radious[m] </h2>
-        <input type="number">
-        <input type="number">
-        <input type="number">
-    </div>
+    <table id="bendix-features" border="1">
+        <tr>
+            <th> Mass [Kg]</th>
+            <th> Inner Radius [m] </th>
+            <th> Outter Radius [m] </th>
+        </tr>
+
+        <tr>
+            <td><input class="masses" type="number"></td>
+            <td><input class="inner-radius" type="number"></td>
+            <td><input class="outter-radius" type="number"></td>
+        </tr>
+        <tr>
+            <td><input class="masses" type="number"></td>
+            <td><input class="inner-radius" type="number"></td>
+            <td><input class="outter-radius" type="number"></td>
+        </tr>
+        <tr>
+            <td><input class="masses" type="number"></td>
+            <td><input class="inner-radius" type="number"></td>
+            <td><input class="outter-radius" type="number"></td>
+        </tr>
+    </table>
+
+    <table border="1">
+        <tr>
+            <th> Mass [Kg]</th>
+            <th> Inner Radius [m] </th>
+            <th> Outter Radius [m] </th>
+        </tr>
+
+        <tr>
+            <td><input class="masses" type="number"></td>
+            <td><input class="inner-radius" type="number"></td>
+            <td><input class="outter-radius" type="number"></td>
+        </tr>
+    </table>
+   
 </div>
 
-<div class="flywheel-features">
-    <h2> Flywheel Features </h2>
-    <div class="masses">
-        <h3> Masses[kg] </h2>
-        <input type="number">
-    </div>
-    <div class="inner-radius">
-        <h3> Inner radious[m] </h2>
-        <input type="number">
-    </div>
-    <div class="outter-radius">
-        <h3> Outter radious[m] </h2>
-        <input type="number">
-    </div>
-</div>
 
 <div>
     <label for="initial-frec">Initial Frecuency [RPM]:</label>
     <input id="pinion-initial-frec" type="number" name="initial-frec">
-
-    <label for="final-frec">Final Frecuency[RPM]:</label>
-    <output id ="flywheel-frec" name="final-frec"> </output>
 </div>
 
-<div id="final-frecuency-plot" class="plot"></div>
+<div id="figures">
+    <div id="final-frecuency-plot" class="plot"></div>
 
-<div id="pinion-frecuency-spring-plot" class="plot"></div>
-
-<div class="slidecontainer">
-    <input type="range" min="1" max="300" class="slider" id="myRange">
-    <output id="demo"></output>
-  </div>
-
-<div id="position-plot" class="plot"></div>
+    <div id="pinion-frecuency-spring-plot" class="plot"></div>
+    
+    <div id="position-plot-slider">
+        <div class="slidecontainer">
+            <input type="range" class="slider" id="myRange">
+            <output id="demo"></output>
+        </div>
+        <div id="position-plot" class="plot"> </div>
+    </div>
+    
+</div>
 
 <script src="index.js" type="module"></script>
 </body>

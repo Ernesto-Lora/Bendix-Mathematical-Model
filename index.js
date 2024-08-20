@@ -13,13 +13,12 @@ import {linearVelocity,
 } from  "./components/springFucntions.js"
 
 
-var masses = document.querySelectorAll(".masses input");
+var masses = document.querySelectorAll(".masses");
 var massesArray = Array.from(masses);
-var innerRadius = document.querySelectorAll(".inner-radius input");
-var outterRadius = document.querySelectorAll(".outter-radius input");
+var innerRadius = document.querySelectorAll(".inner-radius");
+var outterRadius = document.querySelectorAll(".outter-radius");
 
 var pinionInitialFrec = document.getElementById("pinion-initial-frec");
-var finalFrec = document.getElementById("flywheel-frec");
 
 const massesDefault = [0.124, 0.059 + 0.011, 0.130 + 0.059, 5.500];
 const innerRadiusDefault = [0.012, 0.012, 0.16, 0.012];
@@ -63,22 +62,6 @@ function getTotalMass(){
     });
     return totalMass;
 }
-
-
-function showFinialFrec(){
-    var totalMass =  0;
-    massesArray.slice(0, -1).forEach(element => {
-        totalMass += parseFloat(element.value);
-    });
-    var momentsOfInertia = getMomentsOfInertia();
-    var totalMomentInertia = getTotalMomentInertia();
-    finalFrec.value = finalFrecFun (totalMomentInertia,
-        momentsOfInertia.slice(-1), pinionInitialFrec.valueAsNumber );
-}
-
-showFinialFrec();
-
-pinionInitialFrec.addEventListener("input", showFinialFrec);
 
 masses.forEach(element => {
     element.addEventListener("input", 
@@ -132,14 +115,33 @@ plotFinalFrecuency(getMomentsOfInertia(),  getTotalMomentInertia(),
 import {plotPosition} from "./components/plots/plotPosition.js";
 
 
-
-
 var slider = document.getElementById("myRange");
 var demo = document.getElementById("demo");
 
 slider.min = 2;
 slider.max = critics[2];
 demo.innerHTML = slider.value; // Display the default slider value
+
+function updateSliderBackground() {
+    const min = parseInt(slider.min);
+    const max = parseInt(slider.max);
+
+    // Define your limit values
+    const limit1 = critics[0];
+    const limit2 = critics[1];
+
+    let one = parseFloat((limit1-min)/max.toFixed(2));
+    
+
+
+    let background;
+
+    background = `linear-gradient(to right, red ${one * 100}%, blue ${two * 100}%, red ${two * 100}%)`;
+
+    slider.style.background = background;
+}
+
+
 
 plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
 getTotalMass(), p, slider.value);
@@ -163,4 +165,3 @@ slider.oninput = function() {
  plotPinionFrecuencySpring(getTotalMomentInertia(), getMomentsOfInertia(),
     getTotalMass(), p, slider.value);
 }
-
