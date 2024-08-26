@@ -12,50 +12,55 @@
     <h1>Bendix Mathematical Model</h1>
 
 <div id="features">
+    <div id="bendix">
+        <h2>Bendix Features</h2>
+        <table id="bendix-features" border="1">
+            <tr>
+                <th> Mass [Kg]</th>
+                <th> Inner Radius [m] </th>
+                <th> Outter Radius [m] </th>
+            </tr>
+    
+            <tr>
+                <td><input class="masses" type="number"></td>
+                <td><input class="inner-radius" type="number"></td>
+                <td><input class="outter-radius" type="number"></td>
+            </tr>
+            <tr>
+                <td><input class="masses" type="number"></td>
+                <td><input class="inner-radius" type="number"></td>
+                <td><input class="outter-radius" type="number"></td>
+            </tr>
+            <tr>
+                <td><input class="masses" type="number"></td>
+                <td><input class="inner-radius" type="number"></td>
+                <td><input class="outter-radius" type="number"></td>
+            </tr>
+        </table>
+    </div>
 
-    <table id="bendix-features" border="1">
-        <tr>
-            <th> Mass [Kg]</th>
-            <th> Inner Radius [m] </th>
-            <th> Outter Radius [m] </th>
-        </tr>
-
-        <tr>
-            <td><input class="masses" type="number"></td>
-            <td><input class="inner-radius" type="number"></td>
-            <td><input class="outter-radius" type="number"></td>
-        </tr>
-        <tr>
-            <td><input class="masses" type="number"></td>
-            <td><input class="inner-radius" type="number"></td>
-            <td><input class="outter-radius" type="number"></td>
-        </tr>
-        <tr>
-            <td><input class="masses" type="number"></td>
-            <td><input class="inner-radius" type="number"></td>
-            <td><input class="outter-radius" type="number"></td>
-        </tr>
-    </table>
-
-    <table border="1">
-        <tr>
-            <th> Mass [Kg]</th>
-            <th> Inner Radius [m] </th>
-            <th> Outter Radius [m] </th>
-        </tr>
-
-        <tr>
-            <td><input class="masses" type="number"></td>
-            <td><input class="inner-radius" type="number"></td>
-            <td><input class="outter-radius" type="number"></td>
-        </tr>
-    </table>
+    <div>
+        <h2>Fylwheel Features</h2>
+        <table border="1">
+            <tr>
+                <th> Mass [Kg]</th>
+                <th> Inner Radius [m] </th>
+                <th> Outter Radius [m] </th>
+            </tr>
+    
+            <tr>
+                <td><input class="masses" type="number"></td>
+                <td><input class="inner-radius" type="number"></td>
+                <td><input class="outter-radius" type="number"></td>
+            </tr>
+        </table>
+    </div>
    
 </div>
 
 
 <div>
-    <label for="initial-frec">Initial Frecuency [RPM]:</label>
+    <label for="initial-frec" id="label-initial-frec" >Initial Frecuency [RPM]:</label>
     <input id="pinion-initial-frec" type="number" name="initial-frec">
 </div>
 

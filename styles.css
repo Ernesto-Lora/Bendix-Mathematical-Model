@@ -54,7 +54,7 @@ th {
   width: 100%;
   height: 15px;
   border-radius: 5px;  
-  background: linear-gradient(to right, red 0%,red 10%, blue 10%, blue 80%,red 80%, red 100%);;
+  /* background: linear-gradient(to right, red 0%,red 10%, blue 10%, blue 80%,red 80%, red 100%);*/
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
@@ -72,22 +72,12 @@ th {
 }
 
 
-
-
-/* .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #04AA6D;
-  cursor: pointer;
+#label-initial-frec{
+  font-weight: bold;
+  font-size: large;
 }
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #04AA6D;
-  cursor: pointer;
-}  */
-
+#pinion-initial-frec{
+  width: 100px;
+  font-size: large;
+  border-radius: 10%;
+}

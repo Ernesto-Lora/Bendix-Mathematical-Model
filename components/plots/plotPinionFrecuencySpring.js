@@ -12,11 +12,11 @@ import {frecAtCollitionFun
 
 
 export function springCritics(totalMomentInertia, momentsOfInertia,
-    totalMass, p){
+    totalMass, p, initialFrec){
         var inertiaRatio = momentOfInertiaRatio (totalMomentInertia,
             momentsOfInertia.slice(-1)[0] );
     
-        var velocityKcritic1 =  linearVelocity(5000*0.02, p) ;
+        var velocityKcritic1 =  linearVelocity(initialFrec*0.02, p) ;
     
         var kcritic1= springRateCritcAfterCollision(inertiaRatio, velocityKcritic1,
             0.05, 0.05+0.004, totalMass);
@@ -24,8 +24,9 @@ export function springCritics(totalMomentInertia, momentsOfInertia,
         var criticInitialVelocity = linearVelocity( frecAtCollitionFun(totalMomentInertia,
             momentsOfInertia.slice(-1)[0], 300*0.02), p);
         
-        var kcritic2 = springRateCritc(linearVelocity(5000*0.02, p), criticInitialVelocity,
+        var kcritic2 = springRateCritc(linearVelocity(initialFrec*0.02, p), criticInitialVelocity,
         0.05, totalMass);
+        //console.log(initialFrec)
         
         var kcritic3 = springRateCritc(linearVelocity(5000*0.02, p), 0,
         0.05, totalMass);
@@ -35,10 +36,10 @@ export function springCritics(totalMomentInertia, momentsOfInertia,
 
 
 export function plotPinionFrecuencySpring(totalMomentInertia, momentsOfInertia,
-     totalMass, p, k){
+     totalMass, p, k, initialFrec){
 
     var critics = springCritics(totalMomentInertia, momentsOfInertia,
-        totalMass, p); 
+        totalMass, p, initialFrec); 
 
     var limitsK = [1].concat(critics);
     var colorsK = ["red", "blue", "red"];

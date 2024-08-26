@@ -17,7 +17,7 @@ function returnTime(impactPosition, impactVelocity, springFrequency){
     return (1/springFrequency)*(Math.atan(-springFrequency*impactPosition/impactVelocity)+Math.PI)
 }
 
-export function plotPosition(impactPosition, initialVelocity, impactVelocity, k, mass){
+export function plotPosition(impactPosition, initialVelocity, impactVelocity, k, mass, critics){
     var springFrequency = springFrequencyFun(k, mass);
     var impactTime = impactTimeFun(impactPosition, initialVelocity, springFrequency);
 
@@ -33,7 +33,13 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
     function positionT2(t){
         return position(impactPosition, impactVelocity, springFrequency, t-impactTime);
     };
-    var traces2 = getTraces(lim2, ["green"], 0.001, positionT2);
+    var color2;
+    if (k>critics[0] && k<critics[1]){
+        color2 = "green";
+    }else{
+        color2 = "red";
+    }
+    var traces2 = getTraces(lim2, [color2], 0.001, positionT2);
 
 
     var layout = {

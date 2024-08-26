@@ -8,6 +8,10 @@ export function collisionLinearVelocity(initialVel, k, distance, mass){
     return Math.sqrt(initialVel**2 - (k*distance**2)/(mass));
 }
 
+export function initialLinearVelocity(collisionVel,  k, distance, mass){
+    return Math.sqrt(collisionVel**2 + (k*distance**2)/(mass));
+}
+
 export function springRateCritc (initialVel, finalVel, distance, mass){
     return mass*((initialVel**2-finalVel**2)/distance**2);
 }
