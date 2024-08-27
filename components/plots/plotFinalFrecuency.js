@@ -7,10 +7,11 @@ import {finalFrecFun,
 
 import * as springFunctions from "../springFucntions.js"
 
-export function plotFinalFrecuency(momentsOfInertia, totalMomentInertia, k, distace, mass, p){
+export function plotFinalFrecuency(If, It, k, distace, mass, p){
 
-    var collisionPinionCriticFrec = frecAtCollitionFun (totalMomentInertia,
-        momentsOfInertia.slice(-1), 300);
+    var collisionPinionCriticFrec = frecAtCollitionFun (It,
+        If, 300);
+        
     var collisionPinionCriticVel =  springFunctions.linearVelocity(collisionPinionCriticFrec*0.02, p)
 
     var initialVelCritic = springFunctions.initialLinearVelocity(collisionPinionCriticVel, k, distace, mass);
@@ -21,8 +22,8 @@ export function plotFinalFrecuency(momentsOfInertia, totalMomentInertia, k, dist
         frec = springFunctions.frequency(springFunctions.collisionLinearVelocity( springFunctions.linearVelocity(frec*0.02, p),
              k, distace, mass ), p)/0.02;
 
-        return finalFrecFun(totalMomentInertia,
-            momentsOfInertia.slice(-1), frec);
+        return finalFrecFun(It,
+            If, frec);
     };
 
     var limits, colors;

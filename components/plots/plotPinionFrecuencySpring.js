@@ -7,46 +7,44 @@ import {momentOfInertiaRatio,
     springRateCritc,
     collisionLinearVelocity} from "../springFucntions.js";
 
-import {frecAtCollitionFun
+import {finalFrecFun, frecAtCollitionFun
 } from "../collisionFunctions.js";
 
 
-export function springCritics(totalMomentInertia, momentsOfInertia,
-    totalMass, p, initialFrec){
-        var inertiaRatio = momentOfInertiaRatio (totalMomentInertia,
-            momentsOfInertia.slice(-1)[0] );
+export function springCritics(It, If,
+    totalMass, p, distance, initialFrec){
+        var inertiaRatio = momentOfInertiaRatio (It, If);
     
-        var velocityKcritic1 =  linearVelocity(initialFrec*0.02, p) ;
+        var velocityKcritic1 =  linearVelocity(initialFrec*0.02, p);
     
         var kcritic1= springRateCritcAfterCollision(inertiaRatio, velocityKcritic1,
-            0.05, 0.05+0.004, totalMass);
+            distance, distance + 0.0003, totalMass);
     
-        var criticInitialVelocity = linearVelocity( frecAtCollitionFun(totalMomentInertia,
-            momentsOfInertia.slice(-1)[0], 300*0.02), p);
+        var criticInitialVelocity = linearVelocity( frecAtCollitionFun(It,
+            If, 300*0.02), p);
         
         var kcritic2 = springRateCritc(linearVelocity(initialFrec*0.02, p), criticInitialVelocity,
-        0.05, totalMass);
-        //console.log(initialFrec)
+        distance, totalMass);
         
-        var kcritic3 = springRateCritc(linearVelocity(5000*0.02, p), 0,
-        0.05, totalMass);
+        var kcritic3 = springRateCritc(linearVelocity(initialFrec*0.02, p), 0,
+        distance, totalMass);
 
         return [kcritic1, kcritic2, kcritic3];
 }
 
 
-export function plotPinionFrecuencySpring(totalMomentInertia, momentsOfInertia,
-     totalMass, p, k, initialFrec){
+export function plotPinionFrecuencySpring(It, If,
+     totalMass, p, distance, initialFrec, k){
 
-    var critics = springCritics(totalMomentInertia, momentsOfInertia,
-        totalMass, p, initialFrec); 
+    var critics = springCritics(It, If,
+        totalMass, p, distance, initialFrec);
 
     var limitsK = [1].concat(critics);
     var colorsK = ["red", "blue", "red"];
 
     function frecuencyAtCollisionK(k){
-        return frequency(collisionLinearVelocity(linearVelocity(5000*0.02, p),
-        k, 0.05, totalMass), p) /0.02
+        return finalFrecFun(It, If, frequency(collisionLinearVelocity(linearVelocity(initialFrec*0.02, p),
+        k, distance, totalMass), p) /0.02);
     }
 
     var tracesK = getTraces(limitsK, colorsK, 0.1, frecuencyAtCollisionK);
@@ -57,10 +55,9 @@ export function plotPinionFrecuencySpring(totalMomentInertia, momentsOfInertia,
             title: 'Spring rate [N/m]',
         },
         yaxis: {
-            title: 'Pinion Frecuency at Collision [RPM]',
+            title: 'Final Flywheel Frecuency [RPM]',
         }
     };
-
     var point = {
         x: [k],
         y: [frecuencyAtCollisionK(k)],
@@ -72,6 +69,32 @@ export function plotPinionFrecuencySpring(totalMomentInertia, momentsOfInertia,
         }
     }
     tracesK = tracesK.concat(point);
+
+    if(k>critics[2]){
+        function zero(k){
+            return 0;
+        }
+        let limExtreme = [critics[2], k];
+        let colorExtreme = ["red"];
+    
+        var traceExtreme = getTraces(limExtreme, colorExtreme, 0.1, zero);
+        tracesK = tracesK.concat(traceExtreme);
+
+        var point = {
+            x: [k],
+            y: [0],
+            type: "scatter",
+            mode: "marker",
+            marker :{color: "black",
+                symbol: "star",
+                size: 12
+            }
+        }
+        tracesK = tracesK.concat(point);
+
+        Plotly.newPlot('pinion-frecuency-spring-plot', tracesK, layout);
+        return
+    }
 
     Plotly.newPlot('pinion-frecuency-spring-plot', tracesK, layout);
 

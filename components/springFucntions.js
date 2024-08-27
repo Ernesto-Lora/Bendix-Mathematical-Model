@@ -21,6 +21,6 @@ export function momentOfInertiaRatio (Itotal, IFlywheel){
     return ((Itotal)/(Itotal + IFlywheel));
 }
 
-export function springRateCritcAfterCollision (inertiaRatio, initialVel,distance1, distance2, mass){
-   return (mass*inertiaRatio**2*initialVel**2)/((inertiaRatio**2-1)*distance1**2+distance2**2);
+export function springRateCritcAfterCollision (inertiaRatio, initialVel, distance1, distance2, mass){
+   return (mass*inertiaRatio**2*initialVel**2)/((inertiaRatio**2-1)*distance1**2 + distance2**2);
 }
