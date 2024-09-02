@@ -52,7 +52,7 @@ slider.min = 0.3*critics[0];
 slider.max = critics[2]*1.2;
 slider.value = critics[0];
 
-demo.innerHTML = "K = " + slider.value + " N/m"; // Display the default slider value
+demo.innerHTML = `k = ${roundToTwoDecimals(parseFloat(slider.value))} N/m`; // Display the default slider value
 
 sys.plotFinalFrecuency1();
 sys.plotPinionFrecuencySpring1();
@@ -80,13 +80,17 @@ function updateSliderBackground() {
     slider.style.background = background;
 }
 
-updateSliderBackground()
+// updateSliderBackground()
+slider.style.background = "#6482AD";
 
+function roundToTwoDecimals(number) {
+    return Math.round(number * 100) / 100;
+  }
 
 // Update the current slider value (each time you drag the slider handle)
 var k;
 slider.oninput = function() {
-     demo.innerHTML =  "K = "+ this.value+ " N/m";
+     demo.innerHTML = `k = ${roundToTwoDecimals(parseFloat(this.value))} N/m`;
       k = this.value;
 
       sys.plotFinalFrecuency1();

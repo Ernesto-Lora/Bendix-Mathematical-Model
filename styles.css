@@ -3,6 +3,19 @@ body {
   background-color: whitesmoke;
   font-family: Arial, sans-serif;
 }
+#omimotors{
+  width: 400px;
+}
+h1{
+  width: 600px;
+}
+#header{
+  width: 1300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .plot{
     width:600px;
