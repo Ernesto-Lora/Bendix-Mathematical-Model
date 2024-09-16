@@ -27,10 +27,13 @@ var masses2 = document.querySelectorAll(".masses.flywheel");
 var innerRadius2 = document.querySelectorAll(".inner-radius.flywheel");
 var outterRadius2 = document.querySelectorAll(".outter-radius.flywheel");
 
-var step = document.getElementById("step");
+var angle = document.getElementById("angle");
 var distance = document.getElementById("distance");
 
-step.value = 0.012;
+var vibration_vel = document.getElementById("vibration_vel");
+
+vibration_vel.value = 0.065
+angle.value = 5;
 distance.value = 0.005;
 
 
@@ -44,7 +47,8 @@ var ben = new bendixSys.Component(masses1, innerRadius1, outterRadius1);
 var fly = new bendixSys.Component(masses2, innerRadius2, outterRadius2);
 
 
-var sys = new bendixSys.BendixDynamics(ben, fly, pinionInitialFrec, slider, step, distance);
+var sys = new bendixSys.BendixDynamics(ben, fly, pinionInitialFrec,
+     slider, angle, distance, vibration_vel);
 
 var critics = sys.critics();
 
@@ -54,7 +58,6 @@ slider.value = critics[0];
 
 demo.innerHTML = `k = ${roundToTwoDecimals(parseFloat(slider.value))} N/m`; // Display the default slider value
 
-sys.plotFinalFrecuency1();
 sys.plotPinionFrecuencySpring1();
 sys.plotPosition1();
 
@@ -93,7 +96,6 @@ slider.oninput = function() {
      demo.innerHTML = `k = ${roundToTwoDecimals(parseFloat(this.value))} N/m`;
       k = this.value;
 
-      sys.plotFinalFrecuency1();
       sys.plotPinionFrecuencySpring1();
       sys.plotPosition1();
 
@@ -101,9 +103,11 @@ slider.oninput = function() {
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        sys.plotFinalFrecuency1();
         sys.plotPinionFrecuencySpring1();
         sys.plotPosition1();
-        updateSliderBackground()
+        //updateSliderBackground()
+        var critics = sys.critics();
+        slider.min = 0.3*critics[0];
+        slider.max = critics[2]*1.2;
     }
 });

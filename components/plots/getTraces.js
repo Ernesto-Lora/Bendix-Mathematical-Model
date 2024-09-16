@@ -13,6 +13,8 @@ export function getTraces(limits = [], color = [],step, function0){
         traces[index] = {
             x: x[index] ,
             y: y[index],
+            name: '',
+            showlegend: false,
             type: 'scatter',
             mode: 'lines',
             line: { color: color[index] }

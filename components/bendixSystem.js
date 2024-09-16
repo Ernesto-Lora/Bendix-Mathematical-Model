@@ -34,22 +34,26 @@ export class Component {
 }
 
 export class BendixDynamics {
-    constructor(bendix, flywheel, initialFrecuency, k, p, distance){
+    constructor(bendix, flywheel, initialFrecuency, k, angle, distance, vibrationVel){
         this.bendix = bendix;
         this.flywheel = flywheel;
         this.initialFrecuency = initialFrecuency;
         this.k = k;
-        this.p = p;
+        this.angle = angle;
         this.distance = distance;
+        this.vibrationVel = vibrationVel;
+    }
+    p(){
+        return 0.012*Math.tan(0.0174533*this.angle.valueAsNumber)*3.1416;
     }
     v0(){
-        return this.initialFrecuency.value*0.02*this.p.value;
+        return this.initialFrecuency.value*0.02*this.p();
     }
     vc(){
         return Math.sqrt(this.v0()**2 - (this.k.value * this.distance.value**2)/(this.bendix.mass()));
     }
     frecC(){
-        return this.vc()/this.p.value;
+        return this.vc()/this.p();
     }
 
     frecF(){
@@ -57,7 +61,7 @@ export class BendixDynamics {
     }
 
     vF(){
-        return this.frecF()*this.p.value;
+        return this.frecF()*this.p();
     }
 
 
@@ -67,13 +71,13 @@ export class BendixDynamics {
             this.k.value,
             this.distance.value,
             this.bendix.mass(),
-            this.p.value)
+            this.p())
     }
     critics(){ 
         return springCritics(this.bendix.inertia(), 
             this.flywheel.inertia(),
             this.bendix.mass(),
-            this.p.value,
+            this.p(),
             this.distance.valueAsNumber,
             this.initialFrecuency.value )
     }
@@ -82,7 +86,7 @@ export class BendixDynamics {
         plotPinionFrecuencySpring(this.bendix.inertia(), 
         this.flywheel.inertia(),
         this.bendix.mass(),
-        this.p.value,
+        this.p(),
         this.distance.valueAsNumber,
         this.initialFrecuency.valueAsNumber,
         this.k.value)
@@ -94,7 +98,8 @@ export class BendixDynamics {
             this.vF(),
             this.k.valueAsNumber,
             this.bendix.mass(),
-            this.critics()
+            this.critics(),
+            this.vibrationVel.value
          )
     }
 

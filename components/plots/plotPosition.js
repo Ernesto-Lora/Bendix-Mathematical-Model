@@ -17,7 +17,7 @@ function returnTime(impactPosition, impactVelocity, springFrequency){
     return (1/springFrequency)*(Math.atan(-springFrequency*impactPosition/impactVelocity)+Math.PI)
 }
 
-export function plotPosition(impactPosition, initialVelocity, impactVelocity, k, mass, critics){
+export function plotPosition(impactPosition, initialVelocity, impactVelocity, k, mass, critics, vibrationVel){
     if(k> critics[2]){
         plotPosition2(impactPosition, initialVelocity, k, mass);
         return ;
@@ -31,7 +31,6 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
     function positionT1(t){
         return position(0, initialVelocity, springFrequency, t);
     };
-    var traces1 = getTraces(lim1, ["blue"], impactTime/100, positionT1);
 
     var lim2 = [impactTime, 
         returnTime(impactPosition, impactVelocity, springFrequency)+impactTime];
@@ -42,13 +41,34 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
 
     var color2;
     if (k>critics[0] && k<critics[1]){
-        color2 = "green";
+        color2 = "blue";
     }else{
         color2 = "red";
     }
     let t2 = returnTime(impactPosition, impactVelocity, springFrequency)+impactTime;
 
+    var traces1 = getTraces(lim1, [color2], impactTime/100, positionT1);
     var traces2 = getTraces(lim2, [color2], t2/100, positionT2);
+
+    // Vibrations plot
+    var color3;
+    var velVibrations = vibrationVel;
+
+    var maxX = velVibrations/springFrequency;
+    if (maxX > impactPosition){
+        color3 = "orange";
+    }else{
+        color3 = "green";
+    }
+
+    function positionT3(t){
+        return position(0, velVibrations, springFrequency, t);
+    };
+    let returnTime3 = Math.PI/springFrequency;
+
+    var lim3 = [0, returnTime3];
+
+    var traces3 = getTraces(lim3, [color3], returnTime3/100, positionT3);
 
 
     var layout = {
@@ -65,6 +85,7 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
     var line1 = {
         x : [0, returnTime(impactPosition, impactVelocity, springFrequency)+impactTime],
         y : [impactPosition, impactPosition],
+        name:"Flywheel\n Position",
         type: "line",
         line: {color: "black",
             dash: "dash"
@@ -73,13 +94,20 @@ export function plotPosition(impactPosition, initialVelocity, impactVelocity, k,
 
     var line2 = {
         x : [0, returnTime(impactPosition, impactVelocity, springFrequency)+impactTime],
-        y : [impactPosition+0.0003, impactPosition+0.0003],  
+        y : [impactPosition+0.0003, impactPosition+0.0003], 
+        name:"Spring Max. Compression",
         type: "line",
         line: {color: "red",
             dash: "dash"
         }
     }
-    var data = [traces1[0], traces2[0], line1, line2];
+    traces1[0].name = "Bendix Process";
+    traces1[0].showlegend = true;
+
+    traces3[0].name = "Strongest vibration";
+    traces3[0].showlegend = true;
+
+    var data = [traces1[0], traces2[0], traces3[0] , line2, line1];
 
     Plotly.newPlot('position-plot',
          data, layout);
@@ -111,6 +139,7 @@ function plotPosition2(impactPosition, initialVelocity, k, mass){
     var line1 = {
         x : [0, returnTime],
         y : [impactPosition, impactPosition],
+        name:"Flywheel\n Position",
         type: "line",
         line: {color: "black",
             dash: "dash"
@@ -119,13 +148,18 @@ function plotPosition2(impactPosition, initialVelocity, k, mass){
 
     var line2 = {
         x : [0, returnTime],
-        y : [impactPosition+0.0003, impactPosition+0.0003],  
+        y : [impactPosition+0.0003, impactPosition+0.0003],
+        name:"Spring Max. \n Compression",  
         type: "line",
         line: {color: "red",
             dash: "dash"
         }
     }
-    var data = [traces1[0], line1, line2];
+
+    traces1[0].name = "Bendix Dynamic";
+    traces1[0].showlegend = true;
+
+    var data = [traces1[0], line2, line1];
 
     Plotly.newPlot('position-plot',
          data, layout);

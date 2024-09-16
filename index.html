@@ -6,12 +6,12 @@
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/components/logo.png">
     <title>Bendix Mathematical Model</title>
 </head>
 <body>
     <div id="header">
-        <div id="omimotors">
-        <div class="wp-block-group ominav is-layout-constrained wp-block-group-is-layout-constrained has-position-fixed has-z-index" style="--z-index:2">
+        <div id="omimotors" class="wp-block-group ominav is-layout-constrained wp-block-group-is-layout-constrained has-position-fixed has-z-index" style="--z-index:2">
             <div class="wp-block-group alignwide is-content-justification-space-between is-nowrap is-layout-flex wp-container-core-group-is-layout-4 wp-block-group-is-layout-flex wp-container-2 is-position-sticky" style="padding-top:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);margin-top:0;margin-bottom:0">
             <div class="wp-block-group is-nowrap is-layout-flex wp-container-core-group-is-layout-1 wp-block-group-is-layout-flex" style="">
             <!-- <a href="https://omimotors.com"> -->
@@ -75,73 +75,75 @@
     
             </div>
         </div>
-         </div>
-        <div><h1>Bendix Mathematical Model</h1></div>
         
+        <h1 id="title">Bendix Mathematical Model</h1>
     </div>
 
-<div id="features">
-    <div id="bendix">
-        <h2>Bendix Features</h2>
-        <table id="bendix-features" border="1">
-            <tr>
-                <th> Mass [Kg]</th>
-                <th> Inner Radius [m] </th>
-                <th> Outter Radius [m] </th>
-            </tr>
+
+<div id="content">
+    <div id="features">
+        <div id="bendix">
+            <h2>Bendix Features</h2>
+            <table id="bendix-features" border="1">
+                <tr>
+                    <th> Mass [Kg]</th>
+                    <th> Inner Radius [m] </th>
+                    <th> Outter Radius [m] </th>
+                </tr>
+        
+                <tr>
+                    <td><input class="masses bendix" type="number"></td>
+                    <td><input class="inner-radius bendix" type="number"></td>
+                    <td><input class="outter-radius bendix" type="number"></td>
+                </tr>
+                <tr>
+                    <td><input class="masses bendix" type="number"></td>
+                    <td><input class="inner-radius bendix" type="number"></td>
+                    <td><input class="outter-radius bendix" type="number"></td>
+                </tr>
+                <tr>
+                    <td><input class="masses bendix" type="number"></td>
+                    <td><input class="inner-radius bendix" type="number"></td>
+                    <td><input class="outter-radius bendix" type="number"></td>
+                </tr>
+            </table>
+        </div>
     
-            <tr>
-                <td><input class="masses bendix" type="number"></td>
-                <td><input class="inner-radius bendix" type="number"></td>
-                <td><input class="outter-radius bendix" type="number"></td>
-            </tr>
-            <tr>
-                <td><input class="masses bendix" type="number"></td>
-                <td><input class="inner-radius bendix" type="number"></td>
-                <td><input class="outter-radius bendix" type="number"></td>
-            </tr>
-            <tr>
-                <td><input class="masses bendix" type="number"></td>
-                <td><input class="inner-radius bendix" type="number"></td>
-                <td><input class="outter-radius bendix" type="number"></td>
-            </tr>
-        </table>
-    </div>
-
-    <div>
-        <h2>Fylwheel Features</h2>
-        <table border="1">
-            <tr>
-                <th> Mass [Kg]</th>
-                <th> Inner Radius [m] </th>
-                <th> Outter Radius [m] </th>
-            </tr>
+        <div id="flywheel">
+            <h2>Fylwheel Features</h2>
+            <table border="1">
+                <tr>
+                    <th> Mass [Kg]</th>
+                    <th> Inner Radius [m] </th>
+                    <th> Outter Radius [m] </th>
+                </tr>
+        
+                <tr>
+                    <td><input class="masses flywheel" type="number"></td>
+                    <td><input class="inner-radius flywheel" type="number"></td>
+                    <td><input class="outter-radius flywheel" type="number"></td>
+                </tr>
+            </table>
+        </div>
+       
     
-            <tr>
-                <td><input class="masses flywheel" type="number"></td>
-                <td><input class="inner-radius flywheel" type="number"></td>
-                <td><input class="outter-radius flywheel" type="number"></td>
-            </tr>
-        </table>
+    
+        <div>
+            <label for="initial-frec" id="label-initial-frec" >Initial Frecuency [RPM]:</label>
+            <input id="pinion-initial-frec" name="initial-frec" type="number">
+        
+            <label for="angle-name" id="label-angle" > Angle[Degree]:</label>
+            <input id="angle" name = "angle-name" type="number">
+        
+            <label for="distance-name" id="label-distance" > Distance[m]:</label>
+            <input id="distance" name = "distance-name" type="number">
+
+            <label for="vibration_vel-name" > Largest Velocity of Vibration [m/s]:</label>
+            <input id="vibration_vel" name = "vibration_vel-name" type="number">
+        </div>
     </div>
-   
-</div>
-
-
-<div>
-    <label for="initial-frec" id="label-initial-frec" >Initial Frecuency [RPM]:</label>
-    <input id="pinion-initial-frec" name="initial-frec" type="number">
-
-    <label for="step-name" id="label-step" >step[m]:</label>
-    <input id="step" name = "step-name" type="number">
-
-    <label for="distance-name" id="label-distance" >distance[m]:</label>
-    <input id="distance" name = "distance-name" type="number">
-</div>
-
-<div id="figures">
-    <div id="final-frecuency-plot" class="plot"></div>
-
+    
+    
     <div id="pinion-frecuency-spring-plot" class="plot"></div>
     
     <div id="position-plot-slider">
@@ -152,6 +154,7 @@
         <div id="position-plot" class="plot"> </div>
     </div>
     
+
 </div>
 
 <script src="index.js" type="module"></script>

@@ -61,6 +61,8 @@ export function plotPinionFrecuencySpring(It, If,
     var point = {
         x: [k],
         y: [frecuencyAtCollisionK(k)],
+        name: '',
+        showlegend: false,
         type: "scatter",
         mode: "marker",
         marker :{color: "black",
@@ -83,13 +85,15 @@ export function plotPinionFrecuencySpring(It, If,
         var point = {
             x: [k],
             y: [0],
+            name: '',
+            showlegend: false,
             type: "scatter",
-            mode: "marker",
+            mode: "markers",
             marker :{color: "black",
                 symbol: "star",
                 size: 12
             }
-        }
+        };
         tracesK = tracesK.concat(point);
 
         Plotly.newPlot('pinion-frecuency-spring-plot', tracesK, layout);
