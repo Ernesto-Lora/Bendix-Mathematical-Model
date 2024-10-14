@@ -8,16 +8,37 @@ body {
   align-items: center;
 }
 
+.hidden {
+  display: none;
+}
+
 #content{
   width: 1400px;
   display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(4, auto);
   column-gap: 15px;
   row-gap: 30px;
-
+}
+#hide-schemas {
+  width: 150px;
+  height: 30px;
+  font-size: large;
 }
 
+#hide-schemas{
+  grid-column: 1/3;
+  grid-row: 2;
+  align-items: center;
+}
+
+/* .schemas-container {
+  width: 1400px;
+  grid-column: 1/3;
+  grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+} */
 
 #header{
   display: flex;
@@ -40,6 +61,24 @@ body {
   grid-row: 1;
   align-items: center;
 }
+
+.schema{
+  width: 600px;
+}
+
+
+
+#pinion-frecuency-spring-plot{
+  grid-column: 1;
+  grid-row: 4;
+}
+
+#position-plot-slider{
+  grid-column: 2;
+  grid-row: 4;
+}
+
+
 #bendix, #flywheel{
   display: flex;
   flex-direction: column;
@@ -47,15 +86,6 @@ body {
   align-items: center;
 }
 
-#pinion-frecuency-spring-plot{
-  grid-column: 1;
-  grid-row: 2;
-}
-
-#position-plot-slider{
-  grid-column: 2;
-  grid-row: 2;
-}
 
 table {
   width: 600px;

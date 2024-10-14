@@ -1,3 +1,17 @@
+const hideSchemasButton = document.getElementById('hide-schemas');
+const schemasContainer = document.querySelector('.schemas-container');
+
+hideSchemasButton.addEventListener('click', () => {
+    schemasContainer.classList.toggle('hidden');
+
+    if (schemasContainer.classList.contains('hidden')) {
+        hideSchemasButton.textContent = 'Show Schemas';
+    } else {
+        hideSchemasButton.textContent = 'Hide Schemas';
+    }
+});
+
+
 var masses = document.querySelectorAll(".masses");
 var innerRadius = document.querySelectorAll(".inner-radius");
 var outterRadius = document.querySelectorAll(".outter-radius");
