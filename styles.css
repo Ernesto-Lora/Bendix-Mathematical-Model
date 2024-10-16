@@ -8,65 +8,56 @@ body {
   align-items: center;
 }
 
+.schemas-container{
+  width: 1010px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+
 .hidden {
   display: none;
 }
 
 #content{
-  width: 1400px;
+  width: 1300px;
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(4, auto);
+  grid-template-rows: repeat(5, auto);
   column-gap: 15px;
   row-gap: 30px;
 }
+
+#bendix{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#e2{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+
 #hide-schemas {
   width: 150px;
   height: 30px;
   font-size: large;
-}
-
-#hide-schemas{
   grid-column: 1/3;
   grid-row: 2;
   align-items: center;
 }
 
-/* .schemas-container {
-  width: 1400px;
+.schemas-container{
   grid-column: 1/3;
   grid-row: 3;
-  display: flex;
-  flex-wrap: wrap;
-} */
-
-#header{
-  display: flex;
-  justify-content: center; /* Centers the title horizontally */
-  align-items: center;
-  position: relative;
-  height: 100px; /* Adjust the height as needed */
-  gap: 50px;
 }
-
-
-
-.plot{
-    width:600px;
-    height:450px;
-}
-
-#features{
-  grid-column: 1/3;
-  grid-row: 1;
-  align-items: center;
-}
-
-.schema{
-  width: 600px;
-}
-
-
 
 #pinion-frecuency-spring-plot{
   grid-column: 1;
@@ -78,6 +69,73 @@ body {
   grid-row: 4;
 }
 
+#spring{
+  grid-column: 1/3;
+  grid-row: 5;
+}
+
+#header{
+  display: flex;
+  justify-content: center; /* Centers the title horizontally */
+  align-items: center;
+  position: relative;
+  height: 100px; /* Adjust the height as needed */
+  gap: 50px;
+}
+
+.plot{
+    width:600px;
+    height:450px;
+}
+
+.schema{
+  width: 500px;
+}
+
+#pinion-frecuency-spring-plot{
+  grid-column: 1;
+  grid-row: 4;
+}
+
+#position-plot-slider{
+  grid-column: 2;
+  grid-row: 4;
+}
+
+#spring{
+  grid-column: 1/3;
+  grid-row: 5;
+}
+
+#spring {
+  text-align: center;
+  margin: 20px;
+}
+
+#spring a {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #3498db;
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #3498db;
+  transition: all 0.3s ease;
+}
+
+#spring a:hover {
+  color: white;
+  background-color: #2596be;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+#spring a:active {
+  transform: translateY(4px);
+}
+
+
 
 #bendix, #flywheel{
   display: flex;
@@ -86,26 +144,6 @@ body {
   align-items: center;
 }
 
-
-table {
-  width: 600px;
-  border-collapse: collapse;
-  border-radius: 5%;
-  overflow: hidden;
-  text-align: center;
-}
-
-th, td {
-  text-align: center;
-  padding: 10px;
-  overflow: hidden;
-}
-
-th {
-  background-color: #6482AD;
-  text-align: center;
-  font-size: large;
-}
 
 .masses, .inner-radius, .outter-radius{
   width: 90%;
@@ -144,4 +182,52 @@ input{
   width: 100px;
   font-size: large;
   border-radius: 10%;
+}
+
+
+.table-features {
+  width: 600px;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.table-features th, .table-features td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.table-features th {
+  background-color: #5c7eac;
+  color: black;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+.table-features td {
+  border: 1px solid #ddd;
+}
+
+.table-features tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table-features tr:hover {
+  background-color: #ddd;
+}
+
+input[type="number"] {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 18px;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
 }
