@@ -7,10 +7,10 @@ import {finalFrecFun,
 
 import * as springFunctions from "../springFucntions.js"
 
-export function plotFinalFrecuency(If, It, k, distace, mass, p){
-
+export function plotFinalFrecuency(If, It, k, distace, mass, p, finalFlywheelFrec){
+    
     var collisionPinionCriticFrec = frecAtCollitionFun (It,
-        If, 300);
+        If, finalFlywheelFrec);
         
     var collisionPinionCriticVel =  springFunctions.linearVelocity(collisionPinionCriticFrec*0.02, p)
 

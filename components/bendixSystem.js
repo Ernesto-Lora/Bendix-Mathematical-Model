@@ -34,15 +34,18 @@ export class Component {
 }
 
 export class BendixDynamics {
-    constructor(bendix, flywheel, initialFrecuency, k, angle, distance, vibrationVel){
+    constructor(bendix, flywheel, initialFrecuency, finalFlywheelFrecuency,
+         k, angle, distance, vibrationVel){
         this.bendix = bendix;
         this.flywheel = flywheel;
         this.initialFrecuency = initialFrecuency;
+        this.finalFlywheelFrecuency = finalFlywheelFrecuency;
         this.k = k;
         this.angle = angle;
         this.distance = distance;
         this.vibrationVel = vibrationVel;
     }
+
     p(){
         return 0.012*Math.tan(0.0174533*this.angle.valueAsNumber)*3.1416;
     }
@@ -71,7 +74,9 @@ export class BendixDynamics {
             this.k.value,
             this.distance.value,
             this.bendix.mass(),
-            this.p())
+            this.p(),
+            this.finalFlywheelFrecuency.valueAsNumber
+        )
     }
     critics(){ 
         return springCritics(this.bendix.inertia(), 
@@ -79,7 +84,9 @@ export class BendixDynamics {
             this.bendix.mass(),
             this.p(),
             this.distance.valueAsNumber,
-            this.initialFrecuency.value )
+            this.initialFrecuency.value,
+            this.finalFlywheelFrecuency.value
+         )
     }
 
     plotPinionFrecuencySpring1(){
@@ -89,7 +96,9 @@ export class BendixDynamics {
         this.p(),
         this.distance.valueAsNumber,
         this.initialFrecuency.valueAsNumber,
-        this.k.value)
+        this.k.value,
+        this.finalFlywheelFrecuency.value
+    )
     }
 
     plotPosition1(){

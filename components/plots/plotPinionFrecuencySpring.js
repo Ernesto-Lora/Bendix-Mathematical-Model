@@ -12,7 +12,8 @@ import {finalFrecFun, frecAtCollitionFun
 
 
 export function springCritics(It, If,
-    totalMass, p, distance, initialFrec){
+    totalMass, p, distance, initialFrec, finalFlywheelFrec){
+        console.log(finalFlywheelFrec);
         var inertiaRatio = momentOfInertiaRatio (It, If);
     
         var velocityKcritic1 =  linearVelocity(initialFrec*0.02, p);
@@ -21,7 +22,7 @@ export function springCritics(It, If,
             distance, distance + 0.0003, totalMass);
     
         var criticInitialVelocity = linearVelocity( frecAtCollitionFun(It,
-            If, 300*0.02), p);
+            If, finalFlywheelFrec*0.02), p);
         
         var kcritic2 = springRateCritc(linearVelocity(initialFrec*0.02, p), criticInitialVelocity,
         distance, totalMass);
@@ -34,10 +35,10 @@ export function springCritics(It, If,
 
 
 export function plotPinionFrecuencySpring(It, If,
-     totalMass, p, distance, initialFrec, k){
+     totalMass, p, distance, initialFrec, k, finalFlywheelFrec){
 
     var critics = springCritics(It, If,
-        totalMass, p, distance, initialFrec);
+        totalMass, p, distance, initialFrec, finalFlywheelFrec);
 
     var limitsK = [1].concat(critics);
     var colorsK = ["red", "blue", "red"];
