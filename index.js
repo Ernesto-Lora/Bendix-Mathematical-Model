@@ -86,7 +86,7 @@ function updateSliderBackground() {
     const min = parseInt(slider.min);
     const max = parseInt(slider.max);
 
-    // Define your limit values
+    // Define limit values
     const limit1 = critics[0];
     const limit2 = critics[1];
 
@@ -108,7 +108,7 @@ function roundToTwoDecimals(number) {
     return Math.round(number * 100) / 100;
   }
 
-// Update the current slider value (each time you drag the slider handle)
+// Update the k value with slider (each time slider is dragged)
 var k;
 slider.oninput = function() {
      demo.innerHTML = `k = ${roundToTwoDecimals(parseFloat(this.value))} N/m`;
