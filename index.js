@@ -1,3 +1,11 @@
+function preventNegative(input) {
+    // Check if the value is negative or zero
+    if (input.value < 1) {
+        // Set it to an empty string or a default positive value
+        input.value = ''; // or input.value = '1';
+    }
+}
+
 const hideSchemasButton = document.getElementById('hide-schemas');
 const schemasContainer = document.querySelector('.schemas-container');
 
@@ -128,4 +136,13 @@ document.addEventListener('keydown', function(event) {
         slider.min = 0.3*critics[0];
         slider.max = critics[2]*1.2;
     }
+});
+
+const all_inputs = document.querySelectorAll("input");
+
+all_inputs.forEach(element => {
+    element.addEventListener('input', function () {
+        // Remove any negative sign (-) from the input value
+        this.value = this.value.replace('-', '');
+    });
 });
