@@ -135,15 +135,12 @@ body {
   transform: translateY(4px);
 }
 
-
-
 #bendix, #flywheel{
   display: flex;
   flex-direction: column;
 
   align-items: center;
 }
-
 
 .masses, .inner-radius, .outter-radius{
   width: 90%;
@@ -173,7 +170,6 @@ body {
   cursor: pointer;
 }
 
-
 label{
   font-weight: bold;
   font-size: large;
@@ -184,9 +180,8 @@ input{
   border-radius: 10%;
 }
 
-
 .table-features {
-  width: 600px;
+  width: 700px;
   border-collapse: collapse;
   font-family: 'Arial', sans-serif;
   margin: 20px 0;

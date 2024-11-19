@@ -29,21 +29,21 @@
         
                 <tr>
                     <td>1</td>
-                    <td><input class="masses bendix" type="number" min="1"></td>
-                    <td><input class="inner-radius bendix" type="number"></td>
-                    <td><input class="outter-radius bendix" type="number"></td>
+                    <td> M<sub>P</sub> <input class="masses bendix" type="number" min="1"></td>
+                    <td> R<sub>1P</sub> <input class="inner-radius bendix" type="number"></td>
+                    <td> R<sub>2P</sub> <input class="outter-radius bendix" type="number"></td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td><input class="masses bendix" type="number"></td>
-                    <td><input class="inner-radius bendix" type="number"></td>
-                    <td><input class="outter-radius bendix" type="number"></td>
+                    <td> M<sub>U</sub> <input class="masses bendix" type="number"></td>
+                    <td> R<sub>1U</sub> <input class="inner-radius bendix" type="number"></td>
+                    <td> R<sub>2U</sub> <input class="outter-radius bendix" type="number"></td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td><input class="masses bendix" type="number"></td>
-                    <td><input class="inner-radius bendix" type="number"></td>
-                    <td><input class="outter-radius bendix" type="number"></td>
+                    <td> M<sub>Oc</sub> <input class="masses bendix" type="number"></td>
+                    <td> R<sub>1Oc</sub> <input class="inner-radius bendix" type="number"></td>
+                    <td> R<sub>2Oc</sub> <input class="outter-radius bendix" type="number"></td>
                 </tr>
             </table>
         </div>
@@ -54,41 +54,41 @@
                 <table class="table-features" border="1">
                     <tr>
                         <th>Component </th>
-                        <th> Mass [Kg]</th>
+                        <th>  Mass [Kg]</th>
                         <th> Inner Radius [m] </th>
                         <th> Outter Radius [m] </th>
                     </tr>
             
                     <tr>
                         <td>4</td>
-                        <td><input class="masses flywheel" type="number"></td>
-                        <td><input class="inner-radius flywheel" type="number"></td>
-                        <td><input class="outter-radius flywheel" type="number"></td>
+                        <td> M<sub>F</sub> <input class="masses flywheel" type="number"></td>
+                        <td> R<sub>1F</sub> <input class="inner-radius flywheel" type="number"></td>
+                        <td> R<sub>2F</sub> <input class="outter-radius flywheel" type="number"></td>
                     </tr>
                 </table>
             </div>
         
             <div>
-            <label for="initial-frec" id="label-initial-frec" >Starting Pinion Frecuency [RPM]:</label>
+            <label for="initial-frec" id="label-initial-frec" >Starting Pinion Frequency (ω<sub>0</sub>) [RPM]:</label>
             <input id="pinion-initial-frec" name="initial-frec" type="number">
             </div>
 
             <div>
-                <label for="final-frec" id="label-final-frec" >Necessary Fylwheel Frecuency  [RPM]: </label>
+                <label for="final-frec" id="label-final-frec" >Necessary Flywheel Frequency (ω<sub>F</sub>) [RPM]: </label>
                 <input id = "flywheel-final-frec" name = "final-frec" type="number">
             </div>
             
             <div>
-                <label for="angle-name" id="label-angle" >Helix Angle[Degree]:</label>
+                <label for="angle-name" id="label-angle" >Helix Angle (𝛼) [Degree]:</label>
                 <input id="angle" name = "angle-name" type="number">
             
             </div>
             <div>
-                <label for="distance-name" id="label-distance" > L[m]:</label>
+                <label for="distance-name" id="label-distance" > Distance between Flywheel and Pinion Gear (L)[m]:</label>
                 <input id="distance" name = "distance-name" type="number">
             </div>
             <div>
-                <label for="vibration_vel-name" > Largest Velocity of Vibration [m/s]:</label>
+                <label for="vibration_vel-name" > Largest Velocity of Vibration (v<sub>v</sub>) [m/s]:</label>
                 <input id="vibration_vel" name = "vibration_vel-name" type="number">
             </div>
         </div>
